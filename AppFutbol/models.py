@@ -13,6 +13,7 @@ class Jugador(models.Model):
     posicion = models.CharField(max_length=50)
     numero_de_camiseta= models.IntegerField()
     club_equipo = models.CharField(max_length=50)
+    goles = models.IntegerField()
     
     def __str__(self):
         return self.nombre + self.apellido
@@ -24,6 +25,8 @@ class Equipo(models.Model):
     puesto = models.IntegerField()
     partidos_jugados= models.IntegerField()
     titulos = models.CharField(max_length=50)
+    goles_a_favor = models.IntegerField()
+    dias_de_partido = models.CharField(max_length=50)
 
     def __str__(self):
         return self.team + self.torneo_liga_campeonato
@@ -35,6 +38,7 @@ class DirectorTecnico(models.Model):
     edad = models.IntegerField()
     dirige = models.CharField(max_length=50)
     titulos = models.CharField(max_length=50)
+    dias_disponibles = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre + self.apellido

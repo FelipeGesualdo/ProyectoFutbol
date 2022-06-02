@@ -1,0 +1,43 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1 align="center">FORMULARIO DE JUGADOR</h1>
+    <form action="{% url 'jugador' %}" method="POST">{% csrf_token %}
+        <div align="center">
+            <label for="nombre">Nombre:</label>
+            <p><input type="text" name="nombre" id="nombre"></p>
+            <label for="apellido">Apellido:</label>
+            <p><input type="text" name="apellido" id="apellido"></p>
+            <label for="email">Email:</label>
+            <p><input type="text" name="email" id="email"></p>
+            <label for="sexo">Sexo:</label>
+            <p><input type="text" name="sexo" id="sexo"></p>
+            <label for="edad">Edad:</label>
+            <p><input type="number" name="edad" id="edad"></p>
+            <label for="peso">Peso:</label>
+            <p><input type="number" name="peso" id="peso"></p>
+            <label for="altura">Altura(cm):</label>
+            <p><input type="number" name="altura" id="altura"></p>
+            <label for="pie_habil">Pie habil:</label>
+            <p><input type="text" name="pie_habil" id="pie_habil"></p>
+            <label for="posicion">Posicion:</label>
+            <p><input type="text" name="posicion" id="posicion"></p>
+            <label for="numero_de_camiseta">Nro. de camiseta:</label>
+            <p><input type="number" name="numero_de_camiseta" id="numero_de_camiseta"></p>
+            <label for="club_equipo">Club/Equipo:</label>
+            <p><input type="text" name="club_equipo" id="club_equipo"></p>
+            <input type="submit" value="ENVIAR">
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1>JUGADOR</h1>
+
+{% endblock %}
+</html>

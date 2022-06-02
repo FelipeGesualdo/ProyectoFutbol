@@ -4,22 +4,22 @@
 
 {% block contenidoQueCambia %}
 
-<h1>FORMULARIO DE JUGADOR</h1>
-    <form action="{% url 'jugador' %}" method="POST">{% csrf_token %}
+    <h1> diretor</h1>
+
+    <form action="{% url 'directortecnico' %}" method="POST">{% csrf_token %}
+
         <table>
-                {{formulario.as_table}}
+            {{formulario.as_table}}
         </table>
         <input type="submit" value="ENVIAR">
     </form>
-<h1>BUSCAR JUGADOR</h1>
-
 
 {% endblock %}
 
 
 {% block titulo %}
 
-    <h1>JUGADOR</h1>
+    <h1>DT</h1>
 
 {% endblock %}
 </html>

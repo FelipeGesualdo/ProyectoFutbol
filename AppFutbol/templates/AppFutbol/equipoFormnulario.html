@@ -3,16 +3,12 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1>FORMULARIO DE EQUIPO</h1>
+    <h1> Equipo</h1>
+    <form action="{% url 'equipo' %}" method="POST">
 
-    <form action="{% url 'equipo' %}" method="POST">{% csrf_token %}
-        <table>
-            {{formulario.as_table}}
-        </table>
+        
         <input type="submit" value="ENVIAR">
     </form>
-
-<h1>BUSCAR EQUIPO</h1>
 {% endblock %}
 
 {% block titulo %}

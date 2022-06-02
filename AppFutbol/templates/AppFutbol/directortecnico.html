@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de dt</title>
-</head>
-<body>
-    
-</body>
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1> FORMULARIO DE DT</h1>
+
+<form action="{% url 'directortecnico' %}" method="POST">{% csrf_token %}
+    <table>
+        {{formulario.as_table}}
+    </table>
+    <input type="submit" value="ENVIAR">
+</form>
+<h1>BUSCAR DT</h1>
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1>DT</h1>
+
+{% endblock %}
 </html>

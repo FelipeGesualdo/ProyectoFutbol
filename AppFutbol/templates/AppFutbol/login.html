@@ -1,0 +1,23 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1> login</h1>
+
+
+<h3>{{mensaje}}</h3>
+
+<form action="{% url 'login' %}" method="POST">{% csrf_token %}
+    {{formulario.as_p}}
+    <input type="submit" value="INICIAR SESION">
+</form>
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1>login</h1>
+
+{% endblock %}
+</html>
