@@ -57,6 +57,74 @@ def equipoFormulario (request):
 def directortecnicoFormulario (request):
     return render(request, "AppFutbol/directortecnicoFormulario.html")
 
+
+def buscarJugador(request):
+    if request.GET['posicion']:
+        posicion=request.GET['posicion']
+        jugadores=Jugador.objects.filter(posicion__icontains=posicion)
+        return render(request, "AppFutbol/resultadosJugador.html", {'jugadores':jugadores})
+    else:
+        respuesta="No se ingreso ninguna posicion"
+        return render(request, "AppFutbol/resultadosJugador.html", {'respuesta':respuesta})
+
+def buscarEquipo(request):
+    if request.GET['dias_de_partido']:
+        dias_de_partido=request.GET['dias_de_partido']
+        equipos=Equipo.objects.filter(dias_de_partido__icontains=dias_de_partido)
+        return render(request, "AppFutbol/resultadosEquipo.html", {'equipos':equipos})
+    else:
+        respuesta="No se ingreso ningun dia"
+        return render(request, "AppFutbol/resultadosEquipo.html", {'respuesta':respuesta})    
+
+def buscarDirectortecnico(request):
+    if request.GET['dias_disponibles']:
+        dias_disponibles=request.GET['dias_disponibles']
+        dts=DirectorTecnico.objects.filter(dias_disponibles__icontains=dias_disponibles)
+        return render(request, "AppFutbol/resultadosDirectortecnico.html", {'dts':dts})
+    else:
+        respuesta="No se ingreso ningun dia"
+        return render(request, "AppFutbol/resultadosDirectortecnico.html", {'respuesta':respuesta})
+
+def leerJugadores(request):
+    jugadores=Jugador.objects.all()
+    contexto={'jugadores':jugadores}
+    return render(request, "AppFutbol/leerJugadores.html", contexto)
+
+def leerEquipos(request):
+    equipos=Equipo.objects.all()
+    contexto={'equipos':equipos}
+    return render(request, "AppFutbol/leerEquipos.html", contexto)
+
+def leerDts(request):
+    Dts=DirectorTecnico.objects.all()
+    contexto={'Dts':Dts}
+    return render(request, "AppFutbol/leerDts.html", contexto)
+
+def eliminarJugador(request, id):
+    jugador=Jugador.objects.get(id=id)
+    jugador.delete()
+    jugadores=Jugador.objects.all()
+    contexto={'jugadores':jugadores}
+    return render(request, "AppFutbol/leerJugadores.html", contexto)
+
+
+
+def eliminarEquipo(request, id):
+    equipo=Equipo.objects.get(id=id)
+    equipo.delete()
+    equipos=Equipo.objects.all()
+    contexto={'equipos':equipos}
+    return render(request, "AppFutbol/leerEquipos.html", contexto)
+
+def eliminarDT(request, id):
+    dt=DirectorTecnico.objects.get(id=id)
+    dt.delete()
+    Dts=DirectorTecnico.objects.all()
+    contexto={'Dts':Dts}
+    return render(request, "AppFutbol/leerDts.html", contexto)
+
+def editarJugador(request,id):
+    jugador=Jugador.objects.get(id=id)
 #-------------------MAS DE LA WEB--------------------------------
 def about(request):
     return render(request, "AppFutbol/about.html")
@@ -65,6 +133,9 @@ def about(request):
 def pages(request):
     return render(request, "AppFutbol/pages.html")
 #mostrar los blogs creados de la BD por los usuarios
+
+def bienvenido(request):
+    return render(request, "AppFutbol/bienvenido.html")
 
 
 #--------------------LOGIN------------------------------------------
@@ -77,7 +148,7 @@ def login_request(request):
             user = authenticate(username=usuario, password=clave)
             if user is not None:
                 login(request, user)
-                return render(request, "AppFutbol/inicio.html",{'usuario':usuario, 'mensaje':'Bienvenido/a al sistema!'})
+                return render(request, "AppFutbol/bienvenido.html",{'usuario':usuario, 'mensaje':'Bienvenido/a al sistema!'})
             else:
                 return render(request, "AppFutbol/inicio.html",{'mensaje':'Usuario o contraseña son incorrectos!. Por favor, vuelva a loguearse'})
         else:

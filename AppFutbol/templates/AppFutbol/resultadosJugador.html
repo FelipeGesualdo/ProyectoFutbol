@@ -1,0 +1,23 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<h1>Jugadores encontrados:</h1>
+{% if jugadores %}
+{% for jug in jugadores %}
+    <p>Nombre: {{jug.nombre}} | Apellido: {{jug.apellido}} | Email: {{jug.email}} | Sexo: {{jug.sexo}} | Edad:{{jug.edad}} | Peso: {{jug.peso}} | Altura: {{jug.altura}} | Pie habil: {{jug.pie_habil}} | Posicion: {{jug.posicion}} | Numero de camiseta: {{jug.numero_de_camiseta}} | Club/Equipo: {{jug.club_equipo}} | Goles: {{jug.goles}} </p>
+
+{% endfor %}
+{% else %}
+{% if respuesta %}
+<p style="color:red">{{respuesta}}</p>
+
+{% endif %}
+    <p>No se encontraron jugadores</p>
+{% endif %}
+
+
+{% endblock %}

@@ -16,7 +16,7 @@ class Jugador(models.Model):
     goles = models.IntegerField()
     
     def __str__(self):
-        return self.nombre + self.apellido
+        return self.nombre+""+self.apellido
 
 class Equipo(models.Model):
     team=models.CharField(max_length=50)
@@ -29,7 +29,7 @@ class Equipo(models.Model):
     dias_de_partido = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.team + self.torneo_liga_campeonato
+        return self.team+""+self.torneo_liga_campeonato
 
 class DirectorTecnico(models.Model):
     nombre = models.CharField(max_length=50)
@@ -41,5 +41,5 @@ class DirectorTecnico(models.Model):
     dias_disponibles = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nombre + self.apellido
+        return self.nombre+""+self.apellido
 

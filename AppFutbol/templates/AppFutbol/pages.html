@@ -3,7 +3,24 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1> Leer mas</h1>
+<h1>Listado de jugadores:</h1>
+{% for jugador in jugadores %}
+    <li>{{jugadores}}</li>
+{% endfor %}
+
+<h1>Listado de equipos:</h1>
+{% for equipo in equipos %}
+    <li>{{equipos}}</li>
+{% endfor %}
+
+<h1>Listado de directores tecnicos:</h1>
+{% for dt in Dts %}
+    <li>{{Dts}}</li>
+{% endfor %}
+
+
+
+
 {% endblock %}
 
 

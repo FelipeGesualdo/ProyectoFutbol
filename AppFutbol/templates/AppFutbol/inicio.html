@@ -3,14 +3,27 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1> inicio</h1>
-<h3>{{usuario}}</h3>
+
+<h3 align="center">{{usuario}}</h3>
+
+<h3 align="center">Que es Buscando Futbol?</h3>
+<p align="center">Buscando Futbol es una pagina que te brinda la posibilidad de encotrar a un jugador, equipo o director tecnico </p>
+<p align="center">que necesites para vos o para tu equipo. Tambien vas a poder contactarte directamente con aquellos </p>
+<p align="center"> que creas que son los mas adecuados para cumplir con tus necesidades futbolisticas!</p>
+
+<p></p>
+<h5 align="center">REGISTRATE</h5>
+<p align="center"><a class="btn btn-primary" href="{% url 'register' %}">Register</a></p>
+<p></p>
+<h5 align="center">INICIA SESION</h5>
+<p align="center"><a class="btn btn-primary" href="{% url 'login' %}">Login</a></p>
+
 {% endblock %}
 
 
 {% block titulo %}
 
-    <h1>INICIO</h1>
+    <h1>BUSCANDO FUTBOL</h1>
     <h3>{{mensaje}}</h3>
 
 {% endblock %}

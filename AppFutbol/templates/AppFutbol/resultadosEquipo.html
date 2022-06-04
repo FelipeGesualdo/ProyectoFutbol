@@ -1,0 +1,21 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<h1>Equipos encontrados:</h1>
+{% if equipos %}
+{% for equipo in equipos %}
+<p>Team: {{equipo.team}} | Cantidad de jugadores: {{equipo.cantidad_de_jugadores}} | Torneo/liga/campeonato: {{equipo.torneo_liga_campeonato}} | Puesto:{{equipo.puesto}} | Partidos jugados: {{eqipo.partidos_jugados}} | Titulos: {{equipo.titulos}} | Goles a favor: {{equipo.goles_a_favor}} | Dias de partido: {{equipo.dias_de_partido}} </p>
+
+{% endfor %}
+{% else %}
+{% if respuesta %}
+<p style="color:red">{{respuesta}}</p>
+
+{% endif %}
+    <p>No se encontraron equipos</p>
+{% endif %}
+{% endblock %}

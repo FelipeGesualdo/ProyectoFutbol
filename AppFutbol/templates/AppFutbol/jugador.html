@@ -4,6 +4,9 @@
 
 {% block contenidoQueCambia %}
 
+
+
+
 <h1>FORMULARIO DE JUGADOR</h1>
     <form action="{% url 'jugador' %}" method="POST">{% csrf_token %}
         <table>
@@ -11,8 +14,21 @@
         </table>
         <input type="submit" value="ENVIAR">
     </form>
-<h1>BUSCAR JUGADOR</h1>
 
+
+    <h1>BUSCAR JUGADOR</h1>
+
+<form action="{% url 'buscarJugador' %}" method="get">
+    <p>Busca a un jugador segun su posicion:</p>
+    <p><input type="text" name="posicion" placeholder="Buscar..."></p>
+    <p></p><input type="submit" value="Buscar"></p>
+</form>
+
+<h1>LEER JUGADORES</h1>
+<h6>Atencion: Para leer los jugadores necesitas estar logueado</h6>
+<form action="{% url 'leerJugadores' %}" method="get">
+    <p></p><input type="submit" value="LEER"></p>
+</form>
 
 {% endblock %}
 
@@ -20,6 +36,7 @@
 {% block titulo %}
 
     <h1>JUGADOR</h1>
+    
 
 {% endblock %}
 </html>

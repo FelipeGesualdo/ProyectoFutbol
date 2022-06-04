@@ -13,6 +13,18 @@
     </form>
 
 <h1>BUSCAR EQUIPO</h1>
+
+<form action="{% url 'buscarEquipo' %}" method="get">
+    <p>Busca a un equipo segun sus dias de partido:</p>
+    <p><input type="text" name="dias_de_partido" placeholder="Buscar..."></p>
+    <p></p><input type="submit" value="Buscar"></p>
+</form>
+
+<h1>LEER EQUIPOS</h1>
+<h6>Para leer los equipos necesitas estar logueado</h6>
+<form action="{% url 'leerEquipos' %}" method="get">
+    <p></p><input type="submit" value="LEER"></p>
+</form>
 {% endblock %}
 
 {% block titulo %}

@@ -1,0 +1,25 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Listado de directores tecnicos:</h1>
+{% for dt in Dts %}
+    <h6>{{Dts}}</h6>
+
+<button>
+    <a href="{% url 'eliminarDT' dt.id %}">Eliminar</a>
+</button>
+{% endfor %}
+
+
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1>Leer directores tecnicos</h1>
+
+{% endblock %}
+</html>

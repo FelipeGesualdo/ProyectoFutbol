@@ -3,21 +3,22 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1> login</h1>
+<h1 align="center">Logueate</h1>
 
 
 <h3>{{mensaje}}</h3>
-
-<form action="{% url 'login' %}" method="POST">{% csrf_token %}
-    {{formulario.as_p}}
-    <input type="submit" value="INICIAR SESION">
-</form>
+<div align="center">
+    <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+        {{formulario.as_p}}
+        <input type="submit" value="INICIAR SESION">
+    </form>
+</div>
 {% endblock %}
 
 
 {% block titulo %}
 
-    <h1>login</h1>
+    <h1>LOGIN</h1>
 
 {% endblock %}
 </html>

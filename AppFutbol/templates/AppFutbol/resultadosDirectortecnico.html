@@ -1,0 +1,21 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<h1>Directores tecnicos encontrados:</h1>
+{% if dts %}
+{% for dt in dts %}
+    <p>Nombre: {{dt.nombre}} | Apellido: {{dt.apellido}} | Email: {{dt.email}} | Edad:{{dt.edad}} | Dirige: {{dt.dirige}} | Titulos: {{dt.titulos}} | Dias disponibles: {{dt.dias_disponibles}} </p>
+
+{% endfor %}
+{% else %}
+{% if respuesta %}
+<p style="color:red">{{respuesta}}</p>
+
+{% endif %}
+    <p>No se encontraron directores tecnicos</p>
+{% endif %}
+{% endblock %}

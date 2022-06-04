@@ -12,6 +12,18 @@
     <input type="submit" value="ENVIAR">
 </form>
 <h1>BUSCAR DT</h1>
+
+<form action="{% url 'buscarDirectortecnico' %}" method="get">
+    <p>Busca a un director tecnico segun sus dias disponibles para dirigir:</p>
+    <p><input type="text" name="dias_disponibles" placeholder="Buscar..."></p>
+    <p></p><input type="submit" value="Buscar"></p>
+</form>
+
+<h1>LEER DIRECTORES TECNICOS:</h1>
+<h6>Para leer los directores tecnicos necesitas estar logueado</h6>
+<form action="{% url 'leerDts' %}" method="get">
+    <p></p><input type="submit" value="LEER"></p>
+</form>
 {% endblock %}
 
 

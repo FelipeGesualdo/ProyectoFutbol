@@ -15,7 +15,21 @@ urlpatterns = [
     path('equipoFormulario/', equipoFormulario, name='equipoFormulario'),
     path('directortecnicoFormulario/', directortecnicoFormulario, name='directortecnicoFormulario'),
 
+    path('buscarJugador/', buscarJugador, name='buscarJugador'),
+    path('buscarEquipo/', buscarEquipo, name='buscarEquipo'),
+    path('buscarDirectortecnico/', buscarDirectortecnico, name='buscarDirectortecnico'),
+
+    path('leerJugadores/', leerJugadores, name='leerJugadores'),
+    path('leerEquipos/', leerEquipos, name='leerEquipos'),
+    path('leerDts/', leerDts, name='leerDts'),
+
+    path('eliminarJugador/<id>', eliminarJugador, name='eliminarJugador'),
+    path('eliminarEquipo/<id>', eliminarEquipo, name='eliminarEquipo'),
+    path('eliminarDT/<id>', eliminarDT, name='eliminarDT'),
+
+
     path('about/', about, name='about'),
+    path('bienvenido/', bienvenido, name='bienvenido'),
     path('pages/', pages, name='pages'),
     path('login/', login_request, name='login'),
     path('register/', register, name='register'),
