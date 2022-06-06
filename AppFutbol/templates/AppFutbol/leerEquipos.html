@@ -6,8 +6,9 @@
 <h1>Listado de equipos:</h1>
 {% for equipo in equipos %}
     <h6>{{equipos}}</h6>
+
 <button>
-    <a href="{% url 'eliminarEquipo' equipo.id %}">Eliminar</a>
+    <a href="{% url 'Equipo_detalle' equipo.id %}">Detalle</a>
 </button>
 {% endfor %}
 

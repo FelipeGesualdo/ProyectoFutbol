@@ -1,0 +1,20 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form method="POST">{% csrf_token %}
+    Estas seguro de que quieres borrar el equipo "{{ object }}"?
+    <input type="submit" value="SI">
+</form>
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    <h1>JUGADOR</h1>
+
+{% endblock %}
+</html>

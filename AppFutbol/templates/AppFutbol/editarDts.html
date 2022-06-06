@@ -1,0 +1,16 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>modificando directores tecnicos:</h1>
+<form action="{% url 'editarDts' id %}" method="POST">{% csrf_token %}
+    <table>
+            {{miFormulario.as_table}}
+    </table>
+    <input type="submit" value="editar">
+</form>
+
+
+
+{% endblock %}

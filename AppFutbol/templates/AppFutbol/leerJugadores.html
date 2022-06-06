@@ -5,10 +5,11 @@
 {% block contenidoQueCambia %}
 <h1>Listado de jugadores:</h1>
 {% for jugador in jugadores %}
-<h6>{{jugadores}}</h6>
+<h6>{{jugador}}</h6>
+
 
 <button>
-    <a href="{% url 'eliminarJugador' jugador.id %}">Eliminar</a>
+    <a href="{% url 'Jugador_detalle' jugador.id %}">Detalle</a>
 </button>
 {% endfor %}
 

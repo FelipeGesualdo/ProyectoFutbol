@@ -1,0 +1,31 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Jugador: {{jugador.nombre}}</h1>
+
+<p>Nombre:<i>{{jugador.nombre}}</i></p>
+<p>Apellido:<i>{{jugador.apellido}}</i></p>
+<p>Email:<i>{{jugador.email}}</i></p>
+<p>Sexo:<i>{{jugador.sexo}}</i></p>
+<p>Edad:<i>{{jugador.edad}}</i></p>
+<p>Peso:<i>{{jugador.peso}}</i></p>
+<p>Altura:<i>{{jugador.altura}}</i></p>
+<p>Pie habil:<i>{{jugador.pie_habil}}</i></p>
+<p>Posicion:<i>{{jugador.posicion}}</i></p>
+<p>Numero de camiseta:<i>{{jugador.numero_de_camiseta}}</i></p>
+<p>Club/equipo:<i>{{jugador.club_equipo}}</i></p>
+<p>Goles:<i>{{jugador.goles}}</i></p>
+<button>
+    <a href="{% url 'eliminarJugador' jugador.id %}">Eliminar</a>
+</button>
+<button>
+    <a href="{% url 'editarJugadores' jugador.id %}">Editar</a>
+</button>
+<button>
+    <a href="{% url 'leerJugadores' %}">Regresar</a>
+</button>
+    
+
+{% endblock %}

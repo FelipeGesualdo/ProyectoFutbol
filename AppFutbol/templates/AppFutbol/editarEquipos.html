@@ -1,0 +1,16 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>modificando equipos:</h1>
+<form action="{% url 'editarEquipos' id %}" method="POST">{% csrf_token %}
+    <table>
+            {{miFormulario.as_table}}
+    </table>
+    <input type="submit" value="editar">
+</form>
+
+
+
+{% endblock %}

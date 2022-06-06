@@ -1,0 +1,27 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Equipo: {{equipo.team}}</h1>
+<p>Team:<i>{{equipo.team}}</i></p>
+<p>Cantidad de jugadores:<i>{{equipo.cantidad_de_jugadores}}</i></p>
+<p>Torneo/liga/campeonato:<i>{{equipo.torneo_liga_campeonato}}</i></p>
+<p>Puesto:<i>{{equipo.puesto}}</i></p>
+<p>Partidos jugados:<i>{{equipo.partidos_jugados}}</i></p>
+<p>Titulos:<i>{{equipo.titulos}}</i></p>
+<p>Goles a favor:<i>{{equipo.goles_a_favor}}</i></p>
+<p>Dias de partido:<i>{{equipo.dias_de_partido}}</i></p>
+
+<button>
+    <a href="{% url 'eliminarEquipo' equipo.id %}">Eliminar</a>
+</button>
+<button>
+    <a href="{% url 'editarEquipos' equipo.id %}">Editar</a>
+</button>
+<button>
+    <a href="{% url 'leerEquipos' %}">Regresar</a>
+</button>
+    
+
+{% endblock %}

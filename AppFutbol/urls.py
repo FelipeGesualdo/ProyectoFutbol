@@ -23,10 +23,23 @@ urlpatterns = [
     path('leerEquipos/', leerEquipos, name='leerEquipos'),
     path('leerDts/', leerDts, name='leerDts'),
 
+    path('editarJugadores/<id>', editarJugadores, name='editarJugadores'),
+    path('editarEquipos/<id>', editarEquipos, name='editarEquipos'),
+    path('editarDts/<id>', editarDts, name='editarDts'),
+
     path('eliminarJugador/<id>', eliminarJugador, name='eliminarJugador'),
     path('eliminarEquipo/<id>', eliminarEquipo, name='eliminarEquipo'),
     path('eliminarDT/<id>', eliminarDT, name='eliminarDT'),
 
+    path('leerJugadores/<pk>', JugadorDetalle.as_view(), name='Jugador_detalle'),    
+    #path('leerJugador/list', JugadoresList.as_view(), name='jugadorListar'), 
+    path('leerJugadores/borrar/<pk>', JugadorEliminacion.as_view(), name='Jugador_borrar'),
+
+    path('leerEquipos/borrar/<pk>', EquipoEliminacion.as_view(), name='Equipo_borrar'),
+    path('leerEquipos/<pk>', EquipoDetalle.as_view(), name='Equipo_detalle'),
+
+    path('leerDts/borrar/<pk>', DirectorTecnicoEliminacion.as_view(), name='DirectorTecnico_borrar'),
+    path('leerDts/<pk>', DirectorTecnicoDetalle.as_view(), name='DirectorTecnico_detalle'),
 
     path('about/', about, name='about'),
     path('bienvenido/', bienvenido, name='bienvenido'),
@@ -34,4 +47,5 @@ urlpatterns = [
     path('login/', login_request, name='login'),
     path('register/', register, name='register'),
     path('logout/', LogoutView.as_view(template_name = "AppFutbol/logout.html"), name='logout'),
+    path('editarPerfil/', editarPerfil, name='editarPerfil'),
 ]

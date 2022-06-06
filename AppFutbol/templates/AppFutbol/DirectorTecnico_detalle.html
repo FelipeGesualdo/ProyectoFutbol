@@ -1,0 +1,26 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1>Director tecnico: {{directortecnico.apellido}}</h1>
+<p>Nombre:<i>{{directortecnico.nombre}}</i></p>
+<p>Apellido:<i>{{directortecnico.apellido}}</i></p>
+<p>Email:<i>{{directortecnico.email}}</i></p>
+<p>Edad:<i>{{directortecnico.edad}}</i></p>
+<p>Dirige:<i>{{directortecnico.dirige}}</i></p>
+<p>Titulos:<i>{{directortecnico.titulos}}</i></p>
+<p>Dias disponibles:<i>{{directortecnico.dias_disponibles}}</i></p>
+
+<button>
+    <a href="{% url 'eliminarDT' dt.id %}">Eliminar</a>
+</button>
+<button>
+    <a href="{% url 'editarDts' dt.id %}">Editar</a>
+</button>
+<button>
+    <a href="{% url 'leerDts' %}">Regresar</a>
+</button>
+    
+
+{% endblock %}

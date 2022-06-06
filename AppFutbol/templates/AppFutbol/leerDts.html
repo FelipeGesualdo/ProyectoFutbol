@@ -6,9 +6,9 @@
 <h1>Listado de directores tecnicos:</h1>
 {% for dt in Dts %}
     <h6>{{Dts}}</h6>
-
+    
 <button>
-    <a href="{% url 'eliminarDT' dt.id %}">Eliminar</a>
+    <a href="{% url 'DirectorTecnico_detalle' dt.id %}">Detalle</a>
 </button>
 {% endfor %}
 
