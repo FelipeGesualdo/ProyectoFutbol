@@ -5,8 +5,8 @@
 {% block contenidoQueCambia %}
 <h1>Listado de directores tecnicos:</h1>
 {% for dt in Dts %}
-    <h6>{{Dts}}</h6>
-    
+    <h6>{{dt}}</h6>
+
 <button>
     <a href="{% url 'DirectorTecnico_detalle' dt.id %}">Detalle</a>
 </button>

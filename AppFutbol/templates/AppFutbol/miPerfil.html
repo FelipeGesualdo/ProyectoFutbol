@@ -1,0 +1,17 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<h1 align="center">Usuario: {{user.username}}</h1>
+<p align="center">email:<i>{{user.email}}</i></p>
+<h5 align="center">EDITAR PERFIL</h5>
+<p align="center"><a class="btn btn-primary" href="{% url 'editarPerfil' %}">Perfil</a></p>
+
+{% endblock %}
+
+{% block titulo %}
+
+    <h1>Perfil</h1>
+
+{% endblock %}

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1>FORMULARIO DE EQUIPO</h1>
+<h1>FORMULARIO DE EQUIPO:</h1>
 
     <form action="{% url 'equipo' %}" method="POST">{% csrf_token %}
         <table>
@@ -12,18 +12,18 @@
         <input type="submit" value="ENVIAR">
     </form>
 
-<h1>BUSCAR EQUIPO</h1>
-
+<h1>BUSCAR EQUIPO:</h1>
+<h6>Atencion: Para inspeccionar equipos necesitas estar logueado</h6>
 <form action="{% url 'buscarEquipo' %}" method="get">
     <p>Busca a un equipo segun sus dias de partido:</p>
     <p><input type="text" name="dias_de_partido" placeholder="Buscar..."></p>
     <p></p><input type="submit" value="Buscar"></p>
 </form>
 
-<h1>LEER EQUIPOS</h1>
-<h6>Para leer los equipos necesitas estar logueado</h6>
+<h1>INSPECCIONAR EQUIPOS:</h1>
+<h6>Atencion: Para inspeccionar los equipos necesitas estar logueado</h6>
 <form action="{% url 'leerEquipos' %}" method="get">
-    <p></p><input type="submit" value="LEER"></p>
+    <p></p><input type="submit" value="INSPECCIONAR"></p>
 </form>
 {% endblock %}
 

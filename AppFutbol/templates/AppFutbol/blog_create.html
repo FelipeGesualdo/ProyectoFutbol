@@ -1,0 +1,26 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+    {{form.as_p}}
+    <button type="submit" value="Submit" class="btn btn-primary mt-4 pl-4 pr-4">Enviar</button>
+
+</form>
+
+
+
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    
+    
+
+{% endblock %}
+</html>

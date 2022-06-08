@@ -1,0 +1,36 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div align="center">
+    <h1>BLOGS</h1>
+</div>
+
+{% for b in object_list %}
+<div align="center">
+    <h4>{{b.titulo}}</h4>
+    <button>
+        <a href="{% url 'blog_detalle' b.id %}">Detalle</a>
+    </button>
+    <button>
+        <a href="{% url 'blog_delete' b.id %}">Eliminar</a>
+    </button>
+</div>
+{% endfor %}
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    
+    
+
+{% endblock %}
+</html>

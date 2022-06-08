@@ -48,4 +48,13 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', LogoutView.as_view(template_name = "AppFutbol/logout.html"), name='logout'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
+    path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
+    path('blog_create/', BlogCreateView.as_view(), name='blog_create'),
+    path('blog_list/', BlogListView.as_view(), name='blog_list'),
+    path('blog_update/<pk>', BlogUpdateView.as_view(), name='blog_update'),
+    path('blog_delete/<pk>', BlogDeleteView.as_view(), name='blog_delete'),
+    path('blog_detalle/<pk>', BlogDetalle.as_view(), name='blog_detalle'),
+    path('miPerfil/<pk>', PerfilDetalle.as_view(), name='miPerfil'),
+
+    
 ]

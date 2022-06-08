@@ -5,7 +5,7 @@
 {% block contenidoQueCambia %}
 <h1>Listado de equipos:</h1>
 {% for equipo in equipos %}
-    <h6>{{equipos}}</h6>
+    <h6>{{equipo}}</h6>
 
 <button>
     <a href="{% url 'Equipo_detalle' equipo.id %}">Detalle</a>

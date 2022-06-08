@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1> FORMULARIO DE DT</h1>
+<h1> FORMULARIO DE DT:</h1>
 
 <form action="{% url 'directortecnico' %}" method="POST">{% csrf_token %}
     <table>
@@ -11,8 +11,8 @@
     </table>
     <input type="submit" value="ENVIAR">
 </form>
-<h1>BUSCAR DT</h1>
-
+<h1>BUSCAR DT:</h1>
+<h6>Atencion: Para buscar directores tecnicos necesitas estar logueado</h6>
 <form action="{% url 'buscarDirectortecnico' %}" method="get">
     <p>Busca a un director tecnico segun sus dias disponibles para dirigir:</p>
     <p><input type="text" name="dias_disponibles" placeholder="Buscar..."></p>
@@ -20,9 +20,9 @@
 </form>
 
 <h1>LEER DIRECTORES TECNICOS:</h1>
-<h6>Para leer los directores tecnicos necesitas estar logueado</h6>
+<h6>Atencion: Para inspeccionar directores tecnicos necesitas estar logueado</h6>
 <form action="{% url 'leerDts' %}" method="get">
-    <p></p><input type="submit" value="LEER"></p>
+    <p></p><input type="submit" value="INSPECCIONAR"></p>
 </form>
 {% endblock %}
 

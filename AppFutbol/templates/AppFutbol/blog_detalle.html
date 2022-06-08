@@ -1,0 +1,24 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div align="center">
+    <p><img src="{{blog.imagen.url}}" style="max-width: 30rem; max-height: 30rem;" class="card-img-top"></p>
+    <h1>{{blog.titulo}}</h1>
+    <h4>{{blog.subtitulo}}</h4>
+    <h6>Usuario:{{blog.user}}</h6>
+    <p>{{blog.cuerpo}}</p>
+    <p>Fecha:{{blog.fecha}}</p>
+    
+</div>
+
+
+
+
+{% endblock %}
+
+{% block titulo %}   
+
+{% endblock %}
+</html>

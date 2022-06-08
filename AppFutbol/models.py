@@ -46,3 +46,17 @@ class DirectorTecnico(models.Model):
 class Avatar(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     avatar= models.ImageField(upload_to='avatar', blank=True, null=True)
+
+class Blog(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen= models.ImageField(upload_to='avatar', blank=True, null=True)
+    titulo= models.CharField(max_length=3000)
+    subtitulo= models.CharField(max_length=3000)
+    cuerpo= models.TextField(max_length=3000)
+    fecha= models.DateTimeField(auto_now_add=True)
+
+
+
+
+
+#class Perfil(models.Model):

@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
+from AppFutbol.forms import BlogForm
 from .models import *
-from AppFutbol.forms import UserEditForm, jugForm, equiForm, dirForm, UserRegistrationForm
+from .models import Avatar
+from AppFutbol.forms import UserEditForm, jugForm, equiForm, dirForm, UserRegistrationForm, AvatarForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from django.views.generic import ListView, DetailView, DeleteView #CreateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from django.urls import reverse_lazy 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 #--------------------VIEWS------------------------------------------
 def inicio(request):
     return render(request, "AppFutbol/inicio.html")
@@ -50,6 +54,11 @@ def directortecnico(request):
         return render(request, "AppFutbol/directortecnico.html", {'formulario':formulario})
 
 #----------------------FORMULARIOS-----------------------------------
+
+
+
+      
+
 
 def jugadorFormulario (request):
     return render(request, "AppFutbol/jugadorFormulario.html")
@@ -248,7 +257,9 @@ def about(request):
 #contar sobre mi y el proyecto
 
 def pages(request):
-    return render(request, "AppFutbol/pages.html")
+    avatar=Avatar.objects.filter(user=request.user)
+    return render(request, "AppFutbol/pages.html", {'blogs': avatar})
+
 #mostrar los blogs creados de la BD por los usuarios
 
 def bienvenido(request):
@@ -303,6 +314,67 @@ def register(request):
         form = UserRegistrationForm()
         return render(request, "AppFutbol/register.html", {'form':form})
 
+@login_required
+def agregarAvatar(request):
+    user=User.objects.get(username=request.user)
+    if request.method == 'POST':
+        formulario=AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            avatarViejo=Avatar.objects.get(user=request.user)
+            if(avatarViejo.avatar):
+                avatarViejo.delete()
+            avatar=Avatar(user=user, avatar=formulario.cleaned_data['avatar'])
+            avatar.save()
+            return render(request, 'AppFutbol/inicio.html', {'usuario':user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
+    else:
+        formulario=AvatarForm()
+    return render(request, 'AppFutbol/editarPerfil.html', {'formulario':formulario, 'usuario':user})
+
+class BlogCreateView(LoginRequiredMixin, CreateView):
+    model = Blog
+    template_name = "AppFutbol/Blog_create.html"
+    form_class= BlogForm
+    success_url=reverse_lazy("inicio")
+
+class BlogListView(LoginRequiredMixin, ListView):
+    model = Blog
+    template_name = "AppFutbol/blog_list.html"
+
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
+    model = Blog
+    template_name = "AppFutbol/blog_update.html"
+    form_class= BlogForm
+    success_url=reverse_lazy("inicio")
+
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = "AppFutbol/blog_delete.html"
+    success_url=reverse_lazy("inicio")
+
+class BlogDetalle(LoginRequiredMixin, DetailView):
+    model = Blog
+    template_name = "AppFutbol/blog_detalle.html"
+
+@login_required
+def eliminarBlog(request, id):
+    blog=Blog.objects.get(id=id)
+    blog.delete()
+    blogs=Blog.objects.all()
+    contexto={'blogs':blogs}
+    return render(request, "AppFutbol/blog_list.html", contexto)
+
+class PerfilDetalle(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "AppFutbol/miPerfil.html"
+
+
+#class BlogListView(ListView):
+   # model = Blog
+   # template_name = "AppFutbol/pages.html"
+
+#class BlogDetalle(LoginRequiredMixin, DetailView):
+    #model = Blog
+    #template_name = "AppFutbol/Blog_detalle.html"
 
 
 

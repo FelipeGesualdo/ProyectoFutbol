@@ -1,0 +1,27 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form method="POST">{% csrf_token %}
+    Estas seguro de que quieres borrar el blog "{{ object }}"?
+    <input type="submit" value="SI">
+</form>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block titulo %}
+
+    
+    
+
+{% endblock %}
+</html>

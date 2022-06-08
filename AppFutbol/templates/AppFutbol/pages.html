@@ -3,21 +3,12 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-<h1>Listado de jugadores:</h1>
-{% for jugador in jugadores %}
-    <li>{{jugadores}}</li>
-{% endfor %}
-
-<h1>Listado de equipos:</h1>
-{% for equipo in equipos %}
-    <li>{{equipos}}</li>
-{% endfor %}
-
-<h1>Listado de directores tecnicos:</h1>
-{% for dt in Dts %}
-    <li>{{Dts}}</li>
-{% endfor %}
-
+<div align="center">
+    <h4>Bienvenido a la seccion de los blogs.</h4>
+    <h6>Aca vas a poder leer los blogs creados por distintos usuarios:</h6>
+    <p>Atencion: tienes que estar logueado para poder ver los blogs</p>
+    <p><a class="btn btn-primary" href="{% url 'blog_list' %}">lista</a></p>
+</div>
 
 
 
@@ -26,7 +17,7 @@
 
 {% block titulo %}
 
-    <h1>Leer mas</h1>
+    <h1>LEER MAS</h1>
 
 {% endblock %}
 </html>
