@@ -1,0 +1,22 @@
+{% extends "AppFutbol/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form method="POST">{% csrf_token %}
+    <table>
+            {{miFormulario.as_table}}
+    </table>
+    <button type="submit" value="Submit" class="btn btn-primary mt-4 pl-4 pr-4">Editar</button>
+</form>
+<button>
+    <a href="{% url 'blog_list' %}">Regresar</a>
+</button>
+
+
+
+{% endblock %}
+{% block titulo %}   
+<h1>Editando blog:</h1>
+{% endblock %}

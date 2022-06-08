@@ -17,12 +17,14 @@
 <p>Numero de camiseta:<i>{{jugador.numero_de_camiseta}}</i></p>
 <p>Club/equipo:<i>{{jugador.club_equipo}}</i></p>
 <p>Goles:<i>{{jugador.goles}}</i></p>
+
 <button>
     <a href="{% url 'eliminarJugador' jugador.id %}">Eliminar</a>
 </button>
 <button>
     <a href="{% url 'editarJugadores' jugador.id %}">Editar</a>
 </button>
+
 <button>
     <a href="{% url 'leerJugadores' %}">Regresar</a>
 </button>

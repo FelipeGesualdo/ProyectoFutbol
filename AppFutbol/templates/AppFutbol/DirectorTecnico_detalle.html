@@ -13,10 +13,10 @@
 <p>Dias disponibles:<i>{{directortecnico.dias_disponibles}}</i></p>
 
 <button>
-    <a href="{% url 'eliminarDT' dt.id %}">Eliminar</a>
+    <a href="{% url 'eliminarDT' directortecnico.id %}">Eliminar</a>
 </button>
 <button>
-    <a href="{% url 'editarDts' dt.id %}">Editar</a>
+    <a href="{% url 'editarDts' directortecnico.id %}">Editar</a>
 </button>
 <button>
     <a href="{% url 'leerDts' %}">Regresar</a>

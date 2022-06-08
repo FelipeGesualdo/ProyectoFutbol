@@ -51,10 +51,12 @@ urlpatterns = [
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
     path('blog_create/', BlogCreateView.as_view(), name='blog_create'),
     path('blog_list/', BlogListView.as_view(), name='blog_list'),
-    path('blog_update/<pk>', BlogUpdateView.as_view(), name='blog_update'),
-    path('blog_delete/<pk>', BlogDeleteView.as_view(), name='blog_delete'),
+    
+    path('blog_confirm_delete/<pk>', BlogDeleteView.as_view(), name='blog_confirm_delete'),
     path('blog_detalle/<pk>', BlogDetalle.as_view(), name='blog_detalle'),
     path('miPerfil/<pk>', PerfilDetalle.as_view(), name='miPerfil'),
+    path('blog_edit/<id>', editarBlog, name='blog_edit'),
+    path('avatar_create/', AvatarCreateView.as_view(), name='crear_avatar'),
+    path('avatar_update/<pk>', AvatarUpdateView.as_view(), name='editar_avatar'),
 
-    
 ]

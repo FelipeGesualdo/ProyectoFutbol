@@ -18,8 +18,10 @@
 <h5 align="center">INICIA SESION</h5>
 <p align="center"><a class="btn btn-primary" href="{% url 'login' %}">Login</a></p>
 
-<h5 align="center">CREA TU BLOG!</h5>
-<p align="center"><a class="btn btn-primary" href="{% url 'blog_create' %}">Crear</a></p>
+{% if request.user.is_authenticated %}
+    <h5 align="center">CREA TU BLOG!</h5>
+    <p align="center"><a class="btn btn-primary" href="{% url 'blog_create' %}">Crear</a></p>
+{% endif %}
 {% endblock %}
 
 

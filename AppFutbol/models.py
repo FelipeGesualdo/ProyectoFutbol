@@ -27,6 +27,7 @@ class Equipo(models.Model):
     titulos = models.CharField(max_length=50)
     goles_a_favor = models.IntegerField()
     dias_de_partido = models.CharField(max_length=50)
+    email= models.EmailField()
 
     def __str__(self):
         return self.team+" "+self.torneo_liga_campeonato

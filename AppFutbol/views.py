@@ -1,7 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-
-from AppFutbol.forms import BlogForm
+from django.shortcuts import redirect, render
+from AppFutbol.forms import BlogForm, BlogUpdateForm
 from .models import *
 from .models import Avatar
 from AppFutbol.forms import UserEditForm, jugForm, equiForm, dirForm, UserRegistrationForm, AvatarForm
@@ -34,7 +32,7 @@ def equipo(request):
         formulario= equiForm(request.POST)
         if formulario.is_valid():
             informacion= formulario.cleaned_data
-            equipo = Equipo(team=informacion['team'], cantidad_de_jugadores=informacion['cantidad_de_jugadores'], torneo_liga_campeonato=informacion['torneo_liga_campeonato'], puesto=informacion['puesto'], partidos_jugados=informacion['partidos_jugados'], titulos=informacion['titulos'], goles_a_favor=informacion['goles_a_favor'], dias_de_partido=informacion['dias_de_partido'])
+            equipo = Equipo(team=informacion['team'], cantidad_de_jugadores=informacion['cantidad_de_jugadores'], torneo_liga_campeonato=informacion['torneo_liga_campeonato'], puesto=informacion['puesto'], partidos_jugados=informacion['partidos_jugados'], titulos=informacion['titulos'], goles_a_favor=informacion['goles_a_favor'], dias_de_partido=informacion['dias_de_partido'], email=informacion['email'])
             equipo.save()
             return render(request, "AppFutbol/inicio.html")
     else:
@@ -215,14 +213,12 @@ def editarDts(request,id):
     return render(request, "AppFutbol/editarDts.html", {'miFormulario':miFormulario, 'id':id}) 
 
 #-----------------------------Views---------------------------------------------
-#class JugadoresList(ListView):
-   # model = Jugador
-   # template_name = "AppFutbol/leerJugador.html"
-#
+
+
 class JugadorDetalle(LoginRequiredMixin, DetailView):
     model = Jugador
     template_name = "AppFutbol/Jugador_detalle.html"
-#
+
 class JugadorEliminacion(DeleteView):
     model = Jugador
     success_url= reverse_lazy('jugador_borrar')
@@ -247,10 +243,7 @@ class DirectorTecnicoEliminacion(DeleteView):
     fields= ['nombre','apellido', 'email', 'edad', 'dirige', 'titulos', 'dias_disponibles']
 
 
-#class JugadoresCrear(CreateView):
-    #model = Jugador
-    #success_url= reverse_lazy('jugador_listar')
-    #fields= ['nombre','apellido', 'email', 'sexo', 'edad', 'peso', 'altura', 'pie_habil', 'posicion', 'numero_de_camiseta', 'club_equipo', 'goles']
+ 
 #-------------------MAS DE LA WEB--------------------------------
 def about(request):
     return render(request, "AppFutbol/about.html")
@@ -260,7 +253,7 @@ def pages(request):
     avatar=Avatar.objects.filter(user=request.user)
     return render(request, "AppFutbol/pages.html", {'blogs': avatar})
 
-#mostrar los blogs creados de la BD por los usuarios
+
 
 def bienvenido(request):
     return render(request, "AppFutbol/bienvenido.html")
@@ -268,6 +261,8 @@ def bienvenido(request):
 @login_required
 def editarPerfil(request):
     usuario=request.user
+    user=User.objects.get(pk=request.user.id)       
+    avatar = Avatar.objects.get(user=user)
     if request.method == 'POST':
         miFormulario= UserEditForm(request.POST, instance=usuario)
         if miFormulario.is_valid():
@@ -280,7 +275,7 @@ def editarPerfil(request):
             return render(request, "AppFutbol/inicio.html", {'usuario':usuario, 'mensaje':'Perfil editado exitosamente'})
     else:
         miFormulario= UserEditForm(instance=usuario)
-    return render(request, "AppFutbol/editarPerfil.html", {'miFormulario':miFormulario, 'usuario':usuario.username})
+    return render(request, "AppFutbol/editarPerfil.html", {'miFormulario':miFormulario, 'usuario':usuario.username, 'avatar':avatar})
 
 #--------------------LOGIN------------------------------------------
 def login_request(request):
@@ -317,6 +312,7 @@ def register(request):
 @login_required
 def agregarAvatar(request):
     user=User.objects.get(username=request.user)
+    avatar=Avatar.object.filter(user=user)
     if request.method == 'POST':
         formulario=AvatarForm(request.POST, request.FILES)
         if formulario.is_valid():
@@ -328,7 +324,7 @@ def agregarAvatar(request):
             return render(request, 'AppFutbol/inicio.html', {'usuario':user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
     else:
         formulario=AvatarForm()
-    return render(request, 'AppFutbol/editarPerfil.html', {'formulario':formulario, 'usuario':user})
+    return render(request, 'AppFutbol/editarPerfil.html', {'formulario':formulario, 'usuario':user, 'avatar':avatar})
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
@@ -340,15 +336,13 @@ class BlogListView(LoginRequiredMixin, ListView):
     model = Blog
     template_name = "AppFutbol/blog_list.html"
 
-class BlogUpdateView(LoginRequiredMixin, UpdateView):
-    model = Blog
-    template_name = "AppFutbol/blog_update.html"
-    form_class= BlogForm
-    success_url=reverse_lazy("inicio")
+
+    
+
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
-    template_name = "AppFutbol/blog_delete.html"
+    template_name = "AppFutbol/blog_confirm_delete.html"
     success_url=reverse_lazy("inicio")
 
 class BlogDetalle(LoginRequiredMixin, DetailView):
@@ -366,22 +360,45 @@ def eliminarBlog(request, id):
 class PerfilDetalle(LoginRequiredMixin, DetailView):
     model = User
     template_name = "AppFutbol/miPerfil.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(PerfilDetalle, self).get_context_data(**kwargs)
+        user=User.objects.get(pk=self.request.user.id)       
+        context['avatar'] = Avatar.objects.get(user=user)
+        return context
+        
+@login_required
+def editarBlog(request,id):
+    blog=Blog.objects.get(id=id)
+    if request.method == 'POST':
+        miFormulario=BlogUpdateForm(request.POST)
+        if miFormulario.is_valid():
+            informacion=miFormulario.cleaned_data
+            blog.titulo=informacion['titulo']
+            blog.subtitulo=informacion['subtitulo']
+            blog.user=informacion['user']
+            
+            blog.cuerpo=informacion['cuerpo']
+            
+            blog.save()
+            blogs=Blog.objects.all()
+            contexto={'blogs':blogs}
+            return redirect('blog_list')
+    else:
+        miFormulario=BlogUpdateForm(initial={'titulo':blog.titulo, 'subtitulo':blog.subtitulo, 'cuerpo':blog.cuerpo, 'user':blog.user })
+    return render(request, "AppFutbol/blog_edit.html", {'miFormulario':miFormulario, 'id':id}) 
 
+class AvatarCreateView(CreateView):
+    model = Avatar
+    form_class = AvatarForm
+    template_name = "AppFutbol/agregarAvatar.html"
+    success_url=reverse_lazy("inicio")
 
-#class BlogListView(ListView):
-   # model = Blog
-   # template_name = "AppFutbol/pages.html"
-
-#class BlogDetalle(LoginRequiredMixin, DetailView):
-    #model = Blog
-    #template_name = "AppFutbol/Blog_detalle.html"
-
-
-
-#-------------------BLOGS-----------------------------
-#https://www.yoga-bonito.com/futbolyoga
-#https://www.bubblefootball.es/blog/ 
-#https://sites.duke.edu/wcwp/        (funcion)
+class AvatarUpdateView(UpdateView):
+    model = Avatar
+    form_class = AvatarForm
+    template_name = "AppFutbol/agregarAvatar.html"
+    success_url=reverse_lazy("inicio")
 
 
 

@@ -1,7 +1,7 @@
 from django import forms 
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.forms import User
-from AppFutbol.models import Blog
+from AppFutbol.models import Blog, Avatar
 class jugForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     apellido = forms.CharField(max_length=50)
@@ -26,6 +26,7 @@ class equiForm(forms.Form):
     titulos = forms.CharField(max_length=50)
     goles_a_favor = forms.IntegerField()
     dias_de_partido = forms.CharField(max_length=50)
+    email = email= forms.EmailField()
 
 class dirForm(forms.Form):
     nombre = forms.CharField(max_length=50)
@@ -57,14 +58,28 @@ class UserEditForm(UserCreationForm):
         fields=('username', 'email', 'password1', 'password2')
         help_texts={k:"" for k in fields}
 
-class AvatarForm(forms.Form):
-    avatar= forms.ImageField(label="Avatar")
+
 
 class BlogForm(forms.ModelForm):
     
     class Meta:
         model= Blog
         fields=('imagen', 'titulo', 'subtitulo', 'cuerpo', 'user')
+
+class BlogUpdateForm(forms.ModelForm):
+    
+    class Meta:
+        model= Blog
+        fields=('titulo', 'subtitulo', 'cuerpo', 'user')
+    
+class AvatarForm(forms.ModelForm):
+    
+    class Meta:
+        model= Avatar
+        
+        fields=('user', 'avatar')
+
+
 
 
               

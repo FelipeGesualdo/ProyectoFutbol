@@ -6,14 +6,11 @@
 
 <h1>AGREGANDO AVATAR DE {{usuario}}</h1>
 
-<form action="{% url 'agregarAvatar'  %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+<form  method="post" enctype="multipart/form-data">{% csrf_token %}
 
-    <table>
-        {{ formulario.as_table}}
-    </table>
-
-    <input type="submit" value="Agregar">
-
+    {{form.as_p}}
+    <button type="submit" value="Submit" class="btn btn-primary mt-4 pl-4 pr-4">Enviar</button>
+    
 </form>
 
 {% endblock %}
