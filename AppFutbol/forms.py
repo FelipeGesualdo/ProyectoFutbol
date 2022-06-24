@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.forms import User
 from AppFutbol.models import Blog, Avatar
+
 class jugForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     apellido = forms.CharField(max_length=50)
@@ -15,7 +16,6 @@ class jugForm(forms.Form):
     numero_de_camiseta= forms.IntegerField()
     club_equipo = forms.CharField(max_length=50)
     goles = forms.IntegerField()
-
 
 class equiForm(forms.Form):
     team=forms.CharField(max_length=50)
@@ -52,7 +52,6 @@ class UserEditForm(UserCreationForm):
     password1 = forms.CharField(label="Modificar Contraseña", widget= forms.PasswordInput)
     password2 = forms.CharField(label="Confirmar contraseña", widget= forms.PasswordInput)
    
-
     class Meta:
         model = User
         fields=('username', 'email', 'password1', 'password2')
@@ -75,8 +74,7 @@ class BlogUpdateForm(forms.ModelForm):
 class AvatarForm(forms.ModelForm):
     
     class Meta:
-        model= Avatar
-        
+        model= Avatar       
         fields=('user', 'avatar')
 
 

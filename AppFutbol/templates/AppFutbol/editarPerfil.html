@@ -17,12 +17,7 @@
 
     <h1>EDITAR PERFIL</h1>
 
-    {% if avatar %}
-    <img src="{{avatar.avatar.url}}" style="max-width: 30rem; max-height: 30rem;" class="card-img-top">
-    <a class="btn btn-primary" href="{% url 'editar_avatar' avatar.id %}">Editar avatar</a>
-    {% else %}
-    <a href="{% url 'crear_avatar' %}">Crear avatar</a>
-    {% endif %}
+
 
 {% endblock %}
 </html>

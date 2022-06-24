@@ -53,11 +53,6 @@ def directortecnico(request):
 
 #----------------------FORMULARIOS-----------------------------------
 
-
-
-      
-
-
 def jugadorFormulario (request):
     return render(request, "AppFutbol/jugadorFormulario.html")
 
@@ -67,6 +62,7 @@ def equipoFormulario (request):
 def directortecnicoFormulario (request):
     return render(request, "AppFutbol/directortecnicoFormulario.html")
 
+#-----------------------------Buscar--------------------------------------------------
 @login_required
 def buscarJugador(request):
     if request.GET['posicion']:
@@ -97,6 +93,8 @@ def buscarDirectortecnico(request):
         respuesta="No se ingreso ningun dia"
         return render(request, "AppFutbol/resultadosDirectortecnico.html", {'respuesta':respuesta})
 
+#--------------------------------------LEER------------------------------------------------
+
 @login_required
 def leerJugadores(request):
     jugadores=Jugador.objects.all()
@@ -115,6 +113,8 @@ def leerDts(request):
     contexto={'Dts':Dts}
     return render(request, "AppFutbol/leerDts.html", contexto)
 
+#--------------------------------ELIMINAR---------------------------------------
+
 @login_required
 def eliminarJugador(request, id):
     jugador=Jugador.objects.get(id=id)
@@ -122,7 +122,6 @@ def eliminarJugador(request, id):
     jugadores=Jugador.objects.all()
     contexto={'jugadores':jugadores}
     return render(request, "AppFutbol/leerJugadores.html", contexto)
-
 
 @login_required
 def eliminarEquipo(request, id):
@@ -139,6 +138,8 @@ def eliminarDT(request, id):
     Dts=DirectorTecnico.objects.all()
     contexto={'Dts':Dts}
     return render(request, "AppFutbol/leerDts.html", contexto)
+
+#--------------------------EDITAR----------------------------- 
 
 @login_required
 def editarJugadores(request,id):
@@ -214,7 +215,6 @@ def editarDts(request,id):
 
 #-----------------------------Views---------------------------------------------
 
-
 class JugadorDetalle(LoginRequiredMixin, DetailView):
     model = Jugador
     template_name = "AppFutbol/Jugador_detalle.html"
@@ -242,27 +242,23 @@ class DirectorTecnicoEliminacion(DeleteView):
     success_url= reverse_lazy('dt_borrar')
     fields= ['nombre','apellido', 'email', 'edad', 'dirige', 'titulos', 'dias_disponibles']
 
-
- 
 #-------------------MAS DE LA WEB--------------------------------
 def about(request):
     return render(request, "AppFutbol/about.html")
-#contar sobre mi y el proyecto
 
 def pages(request):
     avatar=Avatar.objects.filter(user=request.user)
     return render(request, "AppFutbol/pages.html", {'blogs': avatar})
 
-
-
 def bienvenido(request):
     return render(request, "AppFutbol/bienvenido.html")
+
+#-----------------------------PERFIL-----------------------------------
 
 @login_required
 def editarPerfil(request):
     usuario=request.user
     user=User.objects.get(pk=request.user.id)       
-    avatar = Avatar.objects.get(user=user)
     if request.method == 'POST':
         miFormulario= UserEditForm(request.POST, instance=usuario)
         if miFormulario.is_valid():
@@ -275,9 +271,23 @@ def editarPerfil(request):
             return render(request, "AppFutbol/inicio.html", {'usuario':usuario, 'mensaje':'Perfil editado exitosamente'})
     else:
         miFormulario= UserEditForm(instance=usuario)
-    return render(request, "AppFutbol/editarPerfil.html", {'miFormulario':miFormulario, 'usuario':usuario.username, 'avatar':avatar})
+    return render(request, "AppFutbol/editarPerfil.html", {'miFormulario':miFormulario, 'usuario':usuario.username})
+
+class PerfilDetalle(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "AppFutbol/miPerfil.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(PerfilDetalle, self).get_context_data(**kwargs)
+        user=User.objects.get(pk=self.request.user.id)
+        try:
+            context['avatar'] = Avatar.objects.get(user=user)
+        except Avatar.DoesNotExist :
+            pass
+        return context
 
 #--------------------LOGIN------------------------------------------
+
 def login_request(request):
     if request.method == 'POST':
         formulario = AuthenticationForm(request=request, data=request.POST)
@@ -309,22 +319,7 @@ def register(request):
         form = UserRegistrationForm()
         return render(request, "AppFutbol/register.html", {'form':form})
 
-@login_required
-def agregarAvatar(request):
-    user=User.objects.get(username=request.user)
-    avatar=Avatar.object.filter(user=user)
-    if request.method == 'POST':
-        formulario=AvatarForm(request.POST, request.FILES)
-        if formulario.is_valid():
-            avatarViejo=Avatar.objects.get(user=request.user)
-            if(avatarViejo.avatar):
-                avatarViejo.delete()
-            avatar=Avatar(user=user, avatar=formulario.cleaned_data['avatar'])
-            avatar.save()
-            return render(request, 'AppFutbol/inicio.html', {'usuario':user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
-    else:
-        formulario=AvatarForm()
-    return render(request, 'AppFutbol/editarPerfil.html', {'formulario':formulario, 'usuario':user, 'avatar':avatar})
+#----------------------blog---------------------------
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
@@ -335,10 +330,6 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogListView(LoginRequiredMixin, ListView):
     model = Blog
     template_name = "AppFutbol/blog_list.html"
-
-
-    
-
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
@@ -357,16 +348,6 @@ def eliminarBlog(request, id):
     contexto={'blogs':blogs}
     return render(request, "AppFutbol/blog_list.html", contexto)
 
-class PerfilDetalle(LoginRequiredMixin, DetailView):
-    model = User
-    template_name = "AppFutbol/miPerfil.html"
-    
-    def get_context_data(self, **kwargs):
-        context = super(PerfilDetalle, self).get_context_data(**kwargs)
-        user=User.objects.get(pk=self.request.user.id)       
-        context['avatar'] = Avatar.objects.get(user=user)
-        return context
-        
 @login_required
 def editarBlog(request,id):
     blog=Blog.objects.get(id=id)
@@ -386,7 +367,26 @@ def editarBlog(request,id):
             return redirect('blog_list')
     else:
         miFormulario=BlogUpdateForm(initial={'titulo':blog.titulo, 'subtitulo':blog.subtitulo, 'cuerpo':blog.cuerpo, 'user':blog.user })
-    return render(request, "AppFutbol/blog_edit.html", {'miFormulario':miFormulario, 'id':id}) 
+    return render(request, "AppFutbol/blog_edit.html", {'miFormulario':miFormulario, 'id':id})
+        
+#-----------------------------AVATAR--------------------------------
+
+@login_required
+def agregarAvatar(request):
+    user=User.objects.get(username=request.user)
+    avatar=Avatar.object.filter(user=user)
+    if request.method == 'POST':
+        formulario=AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            avatarViejo=Avatar.objects.get(user=request.user)
+            if(avatarViejo.avatar):
+                avatarViejo.delete()
+            avatar=Avatar(user=user, avatar=formulario.cleaned_data['avatar'])
+            avatar.save()
+            return render(request, 'AppFutbol/inicio.html', {'usuario':user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
+    else:
+        formulario=AvatarForm()
+    return render(request, 'AppFutbol/editarPerfil.html', {'formulario':formulario, 'usuario':user, 'avatar':avatar})
 
 class AvatarCreateView(CreateView):
     model = Avatar

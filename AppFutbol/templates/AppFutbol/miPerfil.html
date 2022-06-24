@@ -7,7 +7,13 @@
 <p align="center">email:<i>{{user.email}}</i></p>
 <h5 align="center">EDITAR PERFIL</h5>
 <p align="center"><a class="btn btn-primary" href="{% url 'editarPerfil' %}">Perfil</a></p>
-
+{% if avatar %}
+<h5 align="center">EDITAR AVATAR</h5>
+<p align="center"><a class="btn btn-primary" href="{% url 'editar_avatar' avatar.id %}">EDITAR</a></p>
+{% else %}
+<h5 align="center">CREAR AVATAR</h5>
+<p align="center"><a class="btn btn-primary" href="{% url 'crear_avatar' %}">CREAR</a></p>
+{% endif %}
 {% endblock %}
 
 {% block titulo %}
