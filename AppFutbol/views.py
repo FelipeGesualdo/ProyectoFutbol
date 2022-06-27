@@ -401,26 +401,3 @@ class AvatarUpdateView(UpdateView):
     success_url=reverse_lazy("inicio")
 
 
-
-
-
-
-
-
-
-
-
-
-#nombre = request.POST['nombre']
-        #apellido = request.POST['apellido']
-        #email = request.POST['email']
-        #sexo = request.POST['sexo']
-        #edad = request.POST['edad']
-        #peso = request.POST['peso']
-        #altura = request.POST['altura']
-        #pie_habil = request.POST['pie_habil']
-        #posicion = request.POST['posicion']
-        #numero_de_camiseta = request.POST['numero_de_camiseta']
-        #club_equipo = request.POST['club_equipo']
-        #jugador = Jugador(nombre=nombre, apellido=apellido, email=email, sexo=sexo, edad=edad, peso=peso, altura=altura, pie_habil=pie_habil, posicion=posicion, numero_de_camiseta=numero_de_camiseta, club_equipo=club_equipo)
-
